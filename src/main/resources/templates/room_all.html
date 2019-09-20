@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>All rooms</title>
+    <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
 </head>
 <body>
-    <h1>Temp</h1>
+<div class="container">
+    <h1>Rooms</h1>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Building</th>
+            <th scope="col">Floor</th>
+            <th scope="col">Room number</th>
+            <th scope="col">Capacity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${rooms.isEmpty()}">
+            <td colspan="5">No rooms exist</td>
+        </tr>
+        <tr th:each="r : ${rooms}">
+            <td><span th:text="${r.building}">building</span></td>
+            <td><span th:text="${r.floor}">floor</span></td>
+            <td><span th:text="${r.number}">number</span></td>
+            <td><span th:text="${r.capacity}">capacity</span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

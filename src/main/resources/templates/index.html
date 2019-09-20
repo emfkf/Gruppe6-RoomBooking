@@ -1,12 +1,17 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Room Booking Application</title>
-    <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
 </head>
 <body>
 <div class="container">
     <h1>Index</h1>
+    <ul>
+        <li><a th:href="@{/room/all}">View all rooms</a></li>
+        <li><a th:href="@{/room/add}">Add a room</a></li>
+    </ul>
 </div>
 </body>
 </html>

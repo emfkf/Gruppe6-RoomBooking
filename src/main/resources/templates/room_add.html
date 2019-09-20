@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All rooms</title>
+    <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+<div class="container">
+    <h1>Add room</h1>
+    <form action="#" th:action="@{/room/add}" th:object="${room}" method="post">
+        <div class="form-group">
+            <label for="building-cid">Building</label>
+            <input type="text" class="form-control" id="building-cid" placeholder="Enter building" th:field="*{building}" />
+        </div>
+        <div class="form-group">
+            <label for="floor-cid">Floor</label>
+            <input type="text" class="form-control" id="floor-cid" placeholder="Enter floor number" th:field="*{floor}" />
+        </div>
+        <div class="form-group">
+            <label for="number-cid">Room number</label>
+            <input type="text" class="form-control" id="number-cid" placeholder="Enter room number" th:field="*{number}" />
+        </div>
+        <div class="form-group">
+            <label for="capacity-cid">Capacity</label>
+            <input type="text" class="form-control" id="capacity-cid" placeholder="Enter capacity" th:field="*{capacity}" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

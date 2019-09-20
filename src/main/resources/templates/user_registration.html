@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+<div class="container">
+    <h1>Sign up</h1>
+    <form action="#" th:action="@{/user/register}" th:object="${user}" method="post">
+        <div class="form-group">
+            <label for="firstName-cid">First name</label>
+            <input type="text" class="form-control" id="firstName-cid" placeholder="First name" th:field="*{firstName}" />
+        </div>
+        <div class="form-group">
+            <label for="lastName-cid">Last name</label>
+            <input type="text" class="form-control" id="lastName-cid" placeholder="Last name" th:field="*{lastName}" />
+        </div>
+        <div class="form-group">
+            <label for="email-cid">Email</label>
+            <input type="text" class="form-control" id="email-cid" placeholder="Email" th:field="*{email}" />
+        </div>
+        <div class="form-group">
+            <label for="password-cid">Password</label>
+            <input type="password" class="form-control" id="password-cid" placeholder="Password" th:field="*{password}" />
+        </div>
+        <div class="form-group">
+            <label for="passwordConfirm-cid">Confirm Password</label>
+            <input type="password" class="form-control" id="passwordConfirm-cid" placeholder="Confirm password" th:field="*{passwordConfirm}" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

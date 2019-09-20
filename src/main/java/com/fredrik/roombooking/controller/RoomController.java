@@ -19,6 +19,7 @@ public class RoomController {
     @GetMapping("/all")
     public String viewAllRooms(Model model) {
         model.addAttribute("rooms", roomService.getAll());
+        model.addAttribute("room", new RoomDto());
         return "room_all";
     }
 

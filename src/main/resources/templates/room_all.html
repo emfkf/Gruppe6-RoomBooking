@@ -29,6 +29,25 @@
             <td><span th:text="${r.capacity}">capacity</span></td>
             <td><a th:href="@{/room/delete(roomId=${r.id})}" class="btn btn-danger btn-block">Delete</a></td>
         </tr>
+        <tr>
+            <form action="#" th:action="@{/room/add}" th:object="${room}" method="POST">
+                <td>
+                    <input type="text" class="form-control" placeholder="Building" th:field="*{building}" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Floor" th:field="*{floor}" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Room number" th:field="*{number}" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Capacity" th:field="*{capacity}" />
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-success btn-block">Add</button>
+                </td>
+            </form>
+        </tr>
         </tbody>
     </table>
 </div>

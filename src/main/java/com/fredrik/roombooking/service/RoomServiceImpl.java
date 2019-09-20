@@ -26,8 +26,19 @@ public class RoomServiceImpl implements RoomService {
         }
     }
 
-    public List<Room> viewAll() {
+    @Override
+    public List<Room> getAll() {
         return roomRepository.findAll();
+    }
+
+    public Room getRoom(Long id) {
+        Room room = roomRepository.getOne(id);
+        return room;
+    }
+
+    @Override
+    public void deleteRoom(Long id) {
+        roomRepository.delete(getRoom(id));
     }
 
 }

@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -20,7 +18,7 @@ public class RoomController {
 
     @GetMapping("/all")
     public String viewAllRooms(Model model) {
-        model.addAttribute("rooms", roomService.viewAll());
+        model.addAttribute("rooms", roomService.getAll());
         return "room_all";
     }
 
@@ -35,6 +33,12 @@ public class RoomController {
         if (!bindingResult.hasErrors() && room != null) {
             roomService.addRoom(room);
         }
+        return "redirect:/room/all";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String handleDeleteRoom(@RequestParam(name = "roomId") String roomId) {
+        roomService.deleteRoom(Long.parseLong(roomId));
         return "redirect:/room/all";
     }
 

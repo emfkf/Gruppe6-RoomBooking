@@ -15,6 +15,7 @@
             <th scope="col">Floor</th>
             <th scope="col">Room number</th>
             <th scope="col">Capacity</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
             <td><span th:text="${r.floor}">floor</span></td>
             <td><span th:text="${r.number}">number</span></td>
             <td><span th:text="${r.capacity}">capacity</span></td>
+            <td><a th:href="@{/room/delete(roomId=${r.id})}" class="btn btn-danger btn-block">Delete</a></td>
         </tr>
         </tbody>
     </table>

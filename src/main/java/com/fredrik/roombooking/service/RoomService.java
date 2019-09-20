@@ -8,6 +8,8 @@ import java.util.List;
 public interface RoomService {
 
     void addRoom(RoomDto room);
-    List<Room> viewAll();
+    List<Room> getAll();
+    Room getRoom(Long id);
+    void deleteRoom(Long id);
 
 }

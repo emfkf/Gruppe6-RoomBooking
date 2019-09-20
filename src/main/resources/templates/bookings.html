@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booked rooms</title>
+    <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div class="container">
+    <h1>Booked rooms</h1>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Building</th>
+            <th scope="col">Floor</th>
+            <th scope="col">Room number</th>
+            <th scope="col">Booked by</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${bookings.isEmpty()}">
+            <td colspan="3">No bookings exist</td>
+        </tr>
+        <tr th:each="b : ${bookings}">
+            <td><span th:text="${b.room.building}"></span></td>
+            <td><span th:text="${b.room.floor}"></span></td>
+            <td><span th:text="${b.room.number}"></span></td>
+            <td>
+                <span th:text="${b.user.firstName}"></span>
+                <span th:text="${b.user.lastName}"></span>
+            </td>
+            <td>
+                <a th:href="@{/room/delete_booking(bookingId=${b.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -33,12 +33,12 @@ public class UserController {
             return new ModelAndView("registration", "user", new UserDto());
         }
         userService.registerNewUser(userDto);
-        return new ModelAndView("user_all", "users", userService.getAllUsers());
+        return new ModelAndView("user_all", "users", userService.getAll());
     }
 
     @GetMapping("/all")
     public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userService.getAll());
         return "user_all";
     }
 

@@ -10,6 +10,6 @@ public interface UserService {
     void registerNewUser(UserDto userDto);
     boolean emailExists(String email);
     User getUser(Long id);
-    List<User> getAllUsers();
+    List<User> getAll();
 
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book room</title>
+    <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div class="container">
+    <h1>Book room</h1>
+    <form action="#" th:action="@{/room/book}" th:object="${booking}" method="post">
+        <div class="form-group">
+            <label for="user-cid">User</label>
+            <select class="form-control" id="user-cid" th:field="*{userId}">
+                <option th:each="u : ${users}" th:value="${u.id}">
+                    <span th:text="${u.firstName}"></span>
+                    <span th:text="${u.lastName}"></span>
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="room-cid">Room</label>
+            <select class="form-control" id="room-cid" th:field="*{roomId}">
+                <option th:each="r : ${rooms}" th:value="${r.id}">
+                    <span th:text="${r.building}"></span>
+                    <span th:text="${r.floor}"></span>
+                    <span th:text="${r.number}"></span>
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

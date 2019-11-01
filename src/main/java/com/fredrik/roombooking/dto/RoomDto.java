@@ -21,6 +21,10 @@ public class RoomDto {
     @Max(999)
     private int capacity;
 
+    public RoomDto() {
+
+    }
+
     public String getBuilding() {
         return building;
     }

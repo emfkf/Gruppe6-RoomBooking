@@ -11,5 +11,6 @@ public interface RoomService {
     List<Room> getAll();
     Room getRoom(Long id);
     void deleteRoom(Long id);
+    void updateRoom(Long id, RoomDto room);
 
 }

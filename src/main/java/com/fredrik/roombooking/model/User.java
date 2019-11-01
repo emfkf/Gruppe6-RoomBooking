@@ -16,9 +16,10 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
     private String password;
+    private boolean enabled;
 
     public User() {
-
+        this.enabled = false;
     }
 
     public User(String firstName, String lastName, String email, String password) {
@@ -26,6 +27,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.enabled = false;
     }
 
     public Long getId() {

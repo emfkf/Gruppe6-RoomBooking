@@ -1,13 +1,54 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <link rel="stylesheet" href='/css/custom.scss'>
+    <script src='/webjars/jquery/3.4.1/jquery.slim.min.js'></script>
+    <script src='/webjars/popper.js/1.14.7/umd/popper.min.js'></script>
+    <script src='/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
 </head>
 <body>
-<div th:fragment="header" id="navbar-cid">
-    <nav class="navbar navbar-light bg-light">
+<div th:fragment="header" id="nav-cid">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #c60c30;">
         <a class="navbar-brand" th:href="@{/}">RoomBook</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Room
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="roomDropdown">
+                        <a class="dropdown-item" th:href="@{/room/all}">View all</a>
+                        <a class="dropdown-item" th:href="@{/room/booked}">View booked</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/room/book}">Book</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" th:href="@{/user/all}">View all</a>
+                        <a class="dropdown-item" th:href="@{/user/register}">Register user account</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="my-4 my-sm-0" sec:authorize="isAnonymous()">
+            <a class="btn btn-outline-light" th:href="@{/login.html}">Log in</a>
+        </div>
+        <!--<div class="my-4 my-sm-0" sec:authorize="isAuthenticated()">
+            <a class="btn btn-outline-light" th:href="@{/login.html}">Log out</a>
+        </div>-->
     </nav>
 </div>
 </body>

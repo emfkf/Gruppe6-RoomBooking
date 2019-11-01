@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <title>Booked rooms</title>
     <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <script src='/webjars/jquery/3.4.1/jquery.slim.min.js'></script>
+    <script src='/webjars/popper.js/1.14.7/umd/popper.min.js'></script>
+    <script src='/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
 </head>
 <body>
 <div th:insert="fragments/header :: header"></div>
-<div class="container">
+<div class="container mt-lg-5">
     <h1>Booked rooms</h1>
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">Building</th>
-            <th scope="col">Floor</th>
-            <th scope="col">Room number</th>
+            <th scope="col">Room</th>
             <th scope="col">Booked by</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -24,13 +27,15 @@
             <td colspan="3">No bookings exist</td>
         </tr>
         <tr th:each="b : ${bookings}">
-            <td><span th:text="${b.room.building}"></span></td>
-            <td><span th:text="${b.room.floor}"></span></td>
-            <td><span th:text="${b.room.number}"></span></td>
+            <td><span th:text="${b.room.building}"></span>
+            <span th:text="${b.room.floor}"></span>
+            <span th:text="${b.room.number}"></span></td>
             <td>
                 <span th:text="${b.user.firstName}"></span>
                 <span th:text="${b.user.lastName}"></span>
             </td>
+            <td><span th:text="${b.startDateTime}"></span></td>
+            <td><span th:text="${b.endDateTime}"></span></td>
             <td>
                 <a th:href="@{/room/delete_booking(bookingId=${b.id})}" class="btn btn-danger">Delete</a>
             </td>

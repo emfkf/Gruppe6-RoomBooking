@@ -19,11 +19,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/room/all").hasRole("ADMIN")
-                .antMatchers("/", "/home", "/user/**").permitAll()
+                .antMatchers("/", "/user/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
-            .formLogin()
+            .and()
+                .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/")
                 .permitAll()
             .and()
                 .logout()
@@ -40,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/resources/**", "/static/**", "/webjars/**");
+        web.ignoring().antMatchers("/resources/**", "static/**", "images/**", "/webjars/**", "/businessmeeting.jpg");
     }
 
     @Bean

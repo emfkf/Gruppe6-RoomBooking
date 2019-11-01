@@ -4,19 +4,29 @@
     <meta charset="UTF-8">
     <title>All rooms</title>
     <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <script src='/webjars/jquery/3.4.1/jquery.slim.min.js'></script>
+    <script src='/webjars/popper.js/1.14.7/umd/popper.min.js'></script>
+    <script src='/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <script src="/js/adminConsole.js"></script>
 </head>
 <body>
 <div th:insert="fragments/header :: header"></div>
-<div class="container">
-    <h1>Rooms</h1>
+<div class="container-fluid mt-lg-5">
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+    <h2>Rooms</h2>
     <table class="table">
-        <thead class="thead-dark">
+        <thead class="thead-dark" style="background-color: #131E29">
         <tr>
-            <th scope="col">Building</th>
-            <th scope="col">Floor</th>
-            <th scope="col">Room number</th>
-            <th scope="col">Capacity</th>
-            <th scope="col"></th>
+            <th style="width: 22%">Building</th>
+            <th style="width: 22%">Floor</th>
+            <th style="width: 22%">Room number</th>
+            <th style="width: 22%">Capacity</th>
+            <th style="width: 12%">
+                <button onClick="toggleUpdateAndText()" class="btn btn-outline-light btn-block edit-to">Edit</button>
+                <button onClick="toggleUpdateAndText()" class="btn btn-outline-light btn-block delete-to" style="margin-top: 0px;">Delete</button>
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -24,11 +34,29 @@
             <td colspan="5">No rooms exist</td>
         </tr>
         <tr th:each="r : ${rooms}">
-            <td><span th:text="${r.building}">building</span></td>
-            <td><span th:text="${r.floor}">floor</span></td>
-            <td><span th:text="${r.number}">number</span></td>
-            <td><span th:text="${r.capacity}">capacity</span></td>
-            <td><a th:href="@{/room/delete(roomId=${r.id})}" class="btn btn-danger btn-block">Delete</a></td>
+            <form action="#" th:action="@{/room/update(roomId=${r.id})}" th:object="${room}" method="POST">
+                <td>
+                    <span class="building-t" th:text="${r.building}">building</span>
+                    <input type="text" class="form-control building-u" th:placeholder="${r.building}" th:field="*{building}" />
+                </td>
+                <td>
+                    <span class="floor-t" th:text="${r.floor}">floor</span>
+                    <input type="text" class="form-control floor-u" th:placeholder="${r.floor}" th:field="*{floor}" />
+                </td>
+                <td>
+                    <span class="number-t" th:text="${r.number}">number</span>
+                    <input type="text" class="form-control number-u" th:placeholder="${r.number}" th:field="*{number}" />
+                </td>
+                <td>
+                    <span class="capacity-t" th:text="${r.capacity}">capacity</span>
+                    <input type="text" class="form-control capacity-u" th:placeholder="${r.capacity}" th:field="*{capacity}" />
+                </td>
+            <td>
+                <a th:href="@{/room/delete(roomId=${r.id})}" class="delete-b btn btn-danger btn-block">Delete</a>
+                <button type="submit" class="update-b btn btn-warning btn-block">Update</button>
+            </td>
+
+            </form>
         </tr>
         <tr>
             <form action="#" th:action="@{/room/add}" th:object="${room}" method="POST">
@@ -51,6 +79,36 @@
         </tr>
         </tbody>
     </table>
+    </div>
+    <div class="col-md-3">
+        <h2>Add range</h2>
+        <form action="#" th:action="@{/room/add_range}" th:object="${roomRange}" method="post">
+            <div class="form-group">
+                <label for="building-cid">Building</label>
+                <input type="text" class="form-control" id="building-cid" placeholder="Enter building" th:field="*{building}" />
+            </div>
+            <div class="form-group">
+                <label for="floor-cid">Floor</label>
+                <input type="text" class="form-control" id="floor-cid" placeholder="Enter floor number" th:field="*{floor}" />
+            </div>
+            <div class="form-group">
+                <label for="capacity-cid">Capacity</label>
+                <input type="text" class="form-control" id="capacity-cid" placeholder="Enter capacity" th:field="*{capacity}" />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="startNumber-cid">Start number:</label>
+                    <input type="text" class="form-control" id="startNumber-cid" placeholder="Enter room number" th:field="*{startNumber}" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="endNumber-cid">End number:</label>
+                    <input type="text" class="form-control" id="endNumber-cid" placeholder="Enter room number" th:field="*{endNumber}" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add range</button>
+        </form>
+    </div>
+</div>
 </div>
 </body>
 </html>

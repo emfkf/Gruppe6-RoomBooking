@@ -12,16 +12,17 @@ public class UserDto {
     @NotNull
     @Size(min=1, max=50)
     private String lastName;
-    @Email
+    @Email(message = "Provide a valid e-mail address.   ")
     @NotNull
     @Size(min=6, max=254)
     private String email;
     @NotNull
-    @Size(min=8, max=72)
+    @Size(min=8, max=71)
     private String password;
     @NotNull
-    @Size(min=8, max=72)
+    @Size(min=8, max=71)
     private String passwordConfirm;
+    // TODO Add custom validation for password match to class
 
     public String getFirstName() {
         return firstName;

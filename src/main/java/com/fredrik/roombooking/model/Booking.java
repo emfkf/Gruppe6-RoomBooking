@@ -1,6 +1,7 @@
 package com.fredrik.roombooking.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Booking {
@@ -15,13 +16,18 @@ public class Booking {
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
+
     public Booking() {
 
     }
 
-    public Booking(User user, Room room) {
+    public Booking(User user, Room room, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.user = user;
         this.room = room;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
     public Long getId() {
@@ -48,4 +54,19 @@ public class Booking {
         this.room = room;
     }
 
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
+    }
+
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
+    }
 }

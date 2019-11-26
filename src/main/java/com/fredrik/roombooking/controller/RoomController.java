@@ -20,7 +20,7 @@ import java.security.Principal;
 @Controller
 @RequestMapping(path = "/room")
 public class RoomController {
-
+    
     @Autowired
     private RoomService roomService;
     @Autowired
@@ -28,11 +28,18 @@ public class RoomController {
     @Autowired
     private BookingService bookingService;
 
+    // GET request to /room/add
+    // Returns the view file room_add.html with a room object for user input.
     @GetMapping("/add")
     public ModelAndView showRoomForm() {
         return new ModelAndView("room_add", "room", new Room());
     }
 
+    // POST request to /room/add
+    // Verifies the user input of the room object
+    // If the fields of the room object are valid, and there are no errors, the saving of the room is handled by
+    // the roomService object
+    // The method then redirects to a list of all rooms, which matches the description of the
     @PostMapping("/add")
     public String checkRoomForm(@Valid Room room, BindingResult bindingResult) {
         if (bindingResult.hasErrors() && room == null) {
@@ -42,6 +49,11 @@ public class RoomController {
         return "redirect:/room/all";
     }
 
+    // GET request to /room/add
+    // Returns the view file room_all.html with a model that has
+    // - a List with all the rooms from roomService
+    // - a Room object used for form user input
+    // - a RoomRangeDto which is used to add a range of rooms
     @GetMapping("/all")
     public String viewAllRooms(Model model) {
         model.addAttribute("rooms", roomService.getAll());
@@ -49,6 +61,31 @@ public class RoomController {
         model.addAttribute("roomRange", new RoomRangeDto());
         return "room_all";
     }
+
+    // GET request to /room/delete?roomId=x
+    // Takes room id as a parameter of the url path, specifying which room to be deleted
+    // If the room is not booked by a user, it is deleted by the roomService
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String handleDeleteRoom(@RequestParam(name = "roomId") String roomId) {
+        if (!bookingService.isBooked(roomService.getRoom(Long.parseLong(roomId)))) {
+            roomService.deleteRoom(Long.parseLong(roomId));
+        }
+        return "redirect:/room/all";
+    }
+
+    // GET request to /room/update?roomId=x
+    // Takes room id as a parameter of the url path, specifying which room to be updated
+    // If there are no errors in the method, the updateRoom method of roomService is called
+    // The used is then redirected to /room/all
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String handleUpdateRoom(@RequestParam(name = "roomId") String roomId, @Valid Room room, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors() && room != null) {
+            roomService.updateRoom(Long.parseLong(roomId), room);
+        }
+        return "redirect:/room/all";
+    }
+
+    /* NED TIL HER */
 
     @PostMapping("/add_range")
     public String addRoomRange(@Valid RoomRangeDto roomRange, BindingResult bindingResult) {
@@ -62,22 +99,6 @@ public class RoomController {
 
                 roomService.addRoom(room);
             }
-        }
-        return "redirect:/room/all";
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String handleDeleteRoom(@RequestParam(name = "roomId") String roomId) {
-        if (!bookingService.isBooked(roomService.getRoom(Long.parseLong(roomId)))) {
-            roomService.deleteRoom(Long.parseLong(roomId));
-        }
-        return "redirect:/room/all";
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String handleUpdate(@RequestParam(name = "roomId") String roomId, @Valid Room room, BindingResult bindingResult) {
-        if (!bindingResult.hasErrors() && room != null) {
-            roomService.updateRoom(Long.parseLong(roomId), room);
         }
         return "redirect:/room/all";
     }

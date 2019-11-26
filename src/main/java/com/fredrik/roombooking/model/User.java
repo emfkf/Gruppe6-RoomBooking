@@ -17,7 +17,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
     private String password;
-    private boolean enabled;
+    private boolean enabled; // default = true
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))

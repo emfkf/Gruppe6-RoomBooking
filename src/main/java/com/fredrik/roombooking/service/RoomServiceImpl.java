@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class RoomServiceImpl implements RoomService {
+
     @Autowired
     private RoomRepository roomRepository;
 
@@ -20,7 +21,7 @@ public class RoomServiceImpl implements RoomService {
         List<Room> roomList = roomRepository.findByBuildingAndFloorAndNumber(building, floor, number);
 
         if (roomList.isEmpty()) {
-            roomRepository.save(new Room(building, floor, number, room.getCapacity()));
+            roomRepository.save(room);
         }
     }
 

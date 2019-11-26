@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -17,13 +16,13 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(path = "/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
     @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new UserDto());
-        return "user_registration";
+    public ModelAndView showRegistrationForm(Model model) {
+        return new ModelAndView("user_register", "user", new UserDto());
     }
 
     @PostMapping("/register")
@@ -38,9 +37,8 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.getAll());
-        return "user_all";
+    public ModelAndView showAllUsers() {
+        return new ModelAndView("user_all", "users", userService.getAll());
     }
 
 }

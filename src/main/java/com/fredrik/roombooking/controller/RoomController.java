@@ -1,9 +1,7 @@
 package com.fredrik.roombooking.controller;
 
 import com.fredrik.roombooking.dto.BookingDto;
-import com.fredrik.roombooking.dto.RoomDto;
 import com.fredrik.roombooking.dto.RoomRangeDto;
-import com.fredrik.roombooking.model.Booking;
 import com.fredrik.roombooking.model.Room;
 import com.fredrik.roombooking.model.User;
 import com.fredrik.roombooking.service.BookingService;
@@ -14,12 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping(path = "/room")
 public class RoomController {
+
     @Autowired
     private RoomService roomService;
     @Autowired
@@ -27,33 +28,33 @@ public class RoomController {
     @Autowired
     private BookingService bookingService;
 
-    @GetMapping("/all")
-    public String viewAllRooms(Model model) {
-        model.addAttribute("rooms", roomService.getAll());
-        model.addAttribute("room", new RoomDto());
-        model.addAttribute("roomRange", new RoomRangeDto());
-        return "room_all";
-    }
-
     @GetMapping("/add")
-    public String showRoomForm(Model model) {
-        model.addAttribute("room", new RoomDto());
-        return "room_add";
+    public ModelAndView showRoomForm() {
+        return new ModelAndView("room_add", "room", new Room());
     }
 
     @PostMapping("/add")
-    public String checkRoomInfo(@Valid RoomDto room, BindingResult bindingResult) {
-        if (!bindingResult.hasErrors() && room != null) {
-            roomService.addRoom(room);
+    public String checkRoomForm(@Valid Room room, BindingResult bindingResult) {
+        if (bindingResult.hasErrors() && room == null) {
+            return "redirect:/room/add";
         }
+        roomService.addRoom(room);
         return "redirect:/room/all";
+    }
+
+    @GetMapping("/all")
+    public String viewAllRooms(Model model) {
+        model.addAttribute("rooms", roomService.getAll());
+        model.addAttribute("room", new Room());
+        model.addAttribute("roomRange", new RoomRangeDto());
+        return "room_all";
     }
 
     @PostMapping("/add_range")
     public String addRoomRange(@Valid RoomRangeDto roomRange, BindingResult bindingResult) {
         if (!bindingResult.hasErrors() && roomRange != null) {
             for (int i = roomRange.getStartNumber(); i <= roomRange.getEndNumber(); i++) {
-                RoomDto room = new RoomDto();
+                Room room = new Room();
                 room.setBuilding(roomRange.getBuilding());
                 room.setFloor(roomRange.getFloor());
                 room.setNumber(String.valueOf(i));
@@ -74,39 +75,41 @@ public class RoomController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String handleUpdate(@RequestParam(name = "roomId") String roomId, @Valid RoomDto room, BindingResult bindingResult) {
+    public String handleUpdate(@RequestParam(name = "roomId") String roomId, @Valid Room room, BindingResult bindingResult) {
         if (!bindingResult.hasErrors() && room != null) {
             roomService.updateRoom(Long.parseLong(roomId), room);
         }
         return "redirect:/room/all";
     }
 
-    @GetMapping("/booked")
-    public String viewAllBookings(Model model) {
-        model.addAttribute("bookings", bookingService.getAll());
-        return "bookings";
-    }
-
     @GetMapping("/book")
-    public String showBookingForm(Model model) {
+    public String showBookingForm(Model model, Principal principal) {
         model.addAttribute("booking", new BookingDto());
-        model.addAttribute("users", userService.getAll());
+        model.addAttribute("users", userService.getUserByEmail(principal.getName()));
         model.addAttribute("rooms", roomService.getAll());
         return "room_book";
     }
 
     @PostMapping("/book")
-    public String checkBookingInfo(@Valid BookingDto booking, BindingResult bindingResult) {
-        System.out.println(booking.getStartDateTime());
-        System.out.println(booking.getEndDateTime());
-
+    public String checkBookingForm(@Valid BookingDto booking, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "room_book";
+            return "redirect:/room/booked";
         }
         Room room = roomService.getRoom(booking.getRoomId());
         User user = userService.getUser(booking.getUserId());
-        bookingService.addBooking(user, room, booking.getStartDateTime(), booking.getEndDateTime());
+        bookingService.addBooking(
+                user,
+                room,
+                booking.getStartDateTime(),
+                booking.getEndDateTime()
+        );
         return "redirect:/room/booked";
+    }
+
+    @GetMapping("/booked")
+    public String viewAllBookings(Model model) {
+        model.addAttribute("bookings", bookingService.getAll());
+        return "bookings";
     }
 
     @RequestMapping(value = "/delete_booking", method = RequestMethod.GET)

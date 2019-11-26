@@ -16,6 +16,10 @@ public class BookingDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endDateTime;
 
+    public BookingDto() {
+
+    }
+
     public Long getUserId() {
         return userId;
     }

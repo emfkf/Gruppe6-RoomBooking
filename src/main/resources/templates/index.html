@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Room Booking Application</title>
@@ -13,10 +14,13 @@
 <div th:insert="fragments/header :: header" id="nav-cid"></div>
 <div>
     <div class="container mt-lg-5">
-        <h1>Index</h1>
+        <div sec:authorize="isAnonymous()">
+            <p>Please log in or register a new account to access the application.</p>
+        </div>
+        <h1 sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></h1>
         <ul>
-            <li><a th:href="@{/room/all}">View all rooms</a></li>
-            <li><a th:href="@{/room/add}">Add a room</a></li>
+            <li sec:authorize="hasAuthority('WRITE_PRIVILEGE')"><a th:href="@{/room/all}">View all rooms</a></li>
+            <li sec:authorize="hasAuthority('WRITE_PRIVILEGE')"><a th:href="@{/room/add}">Add a room</a></li>
             <li><a th:href="@{/user/all}">View all users</a></li>
             <li><a th:href="@{/user/register}">Register user account</a></li>
             <li><a th:href="@{/room/book}">Book a room</a></li>

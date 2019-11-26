@@ -1,0 +1,364 @@
+@startuml
+
+title __ROOMBOOKING's Class Diagram__\n
+
+  namespace  {
+    class MavenWrapperDownloader {
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      class com.fredrik.roombooking.RoombookingApplication {
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace config {
+        class com.fredrik.roombooking.config.MvcConfig {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace config {
+        class com.fredrik.roombooking.config.WebSecurityConfig {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace controller {
+        class com.fredrik.roombooking.controller.RoomController {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace controller {
+        class com.fredrik.roombooking.controller.UserController {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dao {
+        interface com.fredrik.roombooking.dao.BookingRepository {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dao {
+        interface com.fredrik.roombooking.dao.ParticipantRepository {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dao {
+        interface com.fredrik.roombooking.dao.PrivilegeRepository {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dao {
+        interface com.fredrik.roombooking.dao.RoleRepository {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dao {
+        interface com.fredrik.roombooking.dao.RoomRepository {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dao {
+        interface com.fredrik.roombooking.dao.UserRepository {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dto {
+        class com.fredrik.roombooking.dto.BookingDto {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dto {
+        class com.fredrik.roombooking.dto.RoomDto {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dto {
+        class com.fredrik.roombooking.dto.RoomRangeDto {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace dto {
+        class com.fredrik.roombooking.dto.UserDto {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace model {
+        class com.fredrik.roombooking.model.Booking {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace model {
+        class com.fredrik.roombooking.model.Participant {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace model {
+        class com.fredrik.roombooking.model.PasswordResetToken {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace model {
+        class com.fredrik.roombooking.model.Privilege {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace model {
+        class com.fredrik.roombooking.model.Role {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace model {
+        class com.fredrik.roombooking.model.Room {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace model {
+        class com.fredrik.roombooking.model.User {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace model {
+        class com.fredrik.roombooking.model.VerificationToken {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace service {
+        interface com.fredrik.roombooking.service.BookingService {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace service {
+        class com.fredrik.roombooking.service.BookingServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace service {
+        interface com.fredrik.roombooking.service.RoomService {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace service {
+        class com.fredrik.roombooking.service.RoomServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace service {
+        class com.fredrik.roombooking.service.UserDetailsServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace service {
+        interface com.fredrik.roombooking.service.UserService {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace service {
+        class com.fredrik.roombooking.service.UserServiceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace spring {
+        class com.fredrik.roombooking.spring.SetupDataLoader {
+        }
+      }
+    }
+  }
+  
+
+  namespace  {
+    namespace om.fredrik.roombooking {
+      namespace validation {
+        class com.fredrik.roombooking.validation.PasswordConstraintValidator {
+        }
+      }
+    }
+  }
+  
+
+  com.fredrik.roombooking.config.MvcConfig .up.|> org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+  com.fredrik.roombooking.config.WebSecurityConfig -up-|> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+  com.fredrik.roombooking.controller.RoomController o-- com.fredrik.roombooking.service.BookingService : bookingService
+  com.fredrik.roombooking.controller.RoomController o-- com.fredrik.roombooking.service.RoomService : roomService
+  com.fredrik.roombooking.controller.RoomController o-- com.fredrik.roombooking.service.UserService : userService
+  com.fredrik.roombooking.controller.UserController o-- com.fredrik.roombooking.service.UserService : userService
+  com.fredrik.roombooking.model.Booking o-- com.fredrik.roombooking.model.Room : room
+  com.fredrik.roombooking.model.Booking o-- com.fredrik.roombooking.model.User : user
+  com.fredrik.roombooking.model.Participant o-- com.fredrik.roombooking.model.Booking : booking
+  com.fredrik.roombooking.model.Participant o-- com.fredrik.roombooking.model.User : user
+  com.fredrik.roombooking.model.PasswordResetToken o-- com.fredrik.roombooking.model.User : user
+  com.fredrik.roombooking.model.VerificationToken o-- com.fredrik.roombooking.model.User : user
+  com.fredrik.roombooking.service.BookingServiceImpl .up.|> com.fredrik.roombooking.service.BookingService
+  com.fredrik.roombooking.service.BookingServiceImpl o-- com.fredrik.roombooking.dao.BookingRepository : bookingRepository
+  com.fredrik.roombooking.service.RoomServiceImpl .up.|> com.fredrik.roombooking.service.RoomService
+  com.fredrik.roombooking.service.RoomServiceImpl o-- com.fredrik.roombooking.dao.RoomRepository : roomRepository
+  com.fredrik.roombooking.service.UserDetailsServiceImpl .up.|> org.springframework.security.core.userdetails.UserDetailsService
+  com.fredrik.roombooking.service.UserDetailsServiceImpl o-- com.fredrik.roombooking.dao.RoleRepository : roleRepository
+  com.fredrik.roombooking.service.UserDetailsServiceImpl o-- com.fredrik.roombooking.dao.UserRepository : userRepository
+  com.fredrik.roombooking.service.UserServiceImpl .up.|> com.fredrik.roombooking.service.UserService
+  com.fredrik.roombooking.service.UserServiceImpl o-- com.fredrik.roombooking.dao.RoleRepository : roleRepository
+  com.fredrik.roombooking.service.UserServiceImpl o-- com.fredrik.roombooking.dao.UserRepository : userRepository
+  com.fredrik.roombooking.spring.SetupDataLoader .up.|> org.springframework.context.ApplicationListener
+  com.fredrik.roombooking.spring.SetupDataLoader o-- com.fredrik.roombooking.dao.PrivilegeRepository : privilegeRepository
+  com.fredrik.roombooking.spring.SetupDataLoader o-- com.fredrik.roombooking.dao.RoleRepository : roleRepository
+  com.fredrik.roombooking.spring.SetupDataLoader o-- com.fredrik.roombooking.dao.UserRepository : userRepository
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -1,8 +1,7 @@
 package com.fredrik.roombooking.dao;
 
-import com.fredrik.roombooking.model.Booking;
 import com.fredrik.roombooking.model.Participant;
-import com.fredrik.roombooking.model.Room;
+import com.fredrik.roombooking.model.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

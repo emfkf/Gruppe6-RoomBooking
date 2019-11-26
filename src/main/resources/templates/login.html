@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Log in</title>
@@ -25,7 +24,7 @@
     <form th:action="@{/login}" method="post">
         <div class="form-group">
             <label for="username-cid">Username</label>
-            <input type="text" class="form-control" name="username" id="username-cid" placeholder="Username">
+            <input type="text" class="form-control c-username" name="username" id="username-cid" placeholder="Username">
         </div>
         <div class="form-group">
             <label for="password-cid">Password</label>

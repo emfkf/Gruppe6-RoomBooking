@@ -24,6 +24,10 @@ public class UserDto {
     private String passwordConfirm;
     // TODO Add custom validation for password match to class
 
+    public UserDto() {
+
+    }
+
     public String getFirstName() {
         return firstName;
     }

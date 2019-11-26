@@ -1,9 +1,10 @@
 package com.fredrik.roombooking.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Room {
@@ -11,10 +12,21 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
+    @Size(min=1, max=50)
     private String building;
+    @NotNull
+    @Size(min=1, max=3)
     private String floor;
+    @NotNull
+    @Size(min=1, max=3)
     private String number;
+    @NotNull
+    @Min(1)
+    @Max(999)
     private int capacity;
+    @Column(name = "times_booked")
+    private int timesBooked;
 
     public Room() {
 
@@ -65,6 +77,14 @@ public class Room {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public int getTimesBooked() {
+        return timesBooked;
+    }
+
+    public void setTimesBooked(int timesBooked) {
+        this.timesBooked = timesBooked;
     }
 
 }

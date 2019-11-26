@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" href='/webjars/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <script src='/webjars/jquery/3.4.1/jquery.slim.min.js'></script>
+    <script src='/webjars/popper.js/1.14.7/umd/popper.min.js'></script>
+    <script src='/webjars/bootstrap/4.3.1/js/bootstrap.min.js'></script>
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div class="container mt-lg-5">
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+    <h2>Sign up</h2>
+    <form action="/" th:action="@{/user/register}" th:object="${user}" method="post">
+        <div class="form-group">
+            <label for="firstName-cid">First name</label>
+            <input type="text" class="form-control" id="firstName-cid" placeholder="First name" th:field="*{firstName}" />
+            <div class="alert alert-danger" th:each="error: ${#fields.errors('firstName')}" th:text="${error}">
+                Validation error
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName-cid">Last name</label>
+            <input type="text" class="form-control" id="lastName-cid" placeholder="Last name" th:field="*{lastName}" />
+            <div class="alert alert-danger" th:each="error: ${#fields.errors('lastName')}" th:text="${error}">
+                Validation error
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email-cid">Email</label>
+            <input type="text" class="form-control" id="email-cid" placeholder="Email" th:field="*{email}" />
+            <div class="alert alert-danger" th:each="error: ${#fields.errors('email')}" th:text="${error}">
+                Validation error
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password-cid">Password</label>
+            <input type="password" class="form-control" id="password-cid" placeholder="Password" th:field="*{password}" />
+            <div class="alert alert-danger" th:each="error: ${#fields.errors('password')}" th:text="${error}">
+                Validation error
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="passwordConfirm-cid">Confirm Password</label>
+            <input type="password" class="form-control" id="passwordConfirm-cid" placeholder="Confirm password" th:field="*{passwordConfirm}" />
+            <div class="alert alert-danger" th:each="error: ${#fields.errors('passwordConfirm')}" th:text="${error}">
+                Validation error
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+    </form>
+</div>
+</div>
+</div>
+</body>
+</html>

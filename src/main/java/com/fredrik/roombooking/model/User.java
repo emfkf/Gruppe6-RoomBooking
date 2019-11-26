@@ -1,6 +1,7 @@
 package com.fredrik.roombooking.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
@@ -17,9 +18,13 @@ public class User {
     private String email;
     private String password;
     private boolean enabled;
+    @ManyToMany
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     public User() {
-        this.enabled = false;
+        this.enabled = true;
     }
 
     public User(String firstName, String lastName, String email, String password) {
@@ -27,7 +32,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.enabled = false;
+        this.enabled = true;
     }
 
     public Long getId() {
@@ -69,5 +74,22 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
 
 }

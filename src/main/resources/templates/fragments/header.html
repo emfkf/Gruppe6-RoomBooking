@@ -26,7 +26,7 @@
                         Room
                     </a>
                     <div class="dropdown-menu" aria-labelledby="roomDropdown">
-                        <a class="dropdown-item" th:href="@{/room/all}">View all</a>
+                        <a sec:authorize="hasAuthority('WRITE_PRIVILEGE')" class="dropdown-item" th:href="@{/room/all}">View all</a>
                         <a class="dropdown-item" th:href="@{/room/booked}">View booked</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" th:href="@{/room/book}">Book</a>
@@ -46,9 +46,9 @@
         <div class="my-4 my-sm-0" sec:authorize="isAnonymous()">
             <a class="btn btn-outline-light" th:href="@{/login.html}">Log in</a>
         </div>
-        <!--<div class="my-4 my-sm-0" sec:authorize="isAuthenticated()">
-            <a class="btn btn-outline-light" th:href="@{/login.html}">Log out</a>
-        </div>-->
+        <div class="my-4 my-sm-0" sec:authorize="isAuthenticated()">
+            <a class="btn btn-outline-light" th:href="@{/logout}">Log out</a>
+        </div>
     </nav>
 </div>
 </body>

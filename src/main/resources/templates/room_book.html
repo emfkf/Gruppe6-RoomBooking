@@ -14,6 +14,9 @@
 <div class="container mt-lg-5">
     <div class="row">
     <div class="col-md-2"></div>
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">>
+        The room is already booked.
+    </div>
     <div class="col-md-8">
     <h1>Book room</h1>
     <p th:if="${rooms.isEmpty()}">No rooms exist.</p>
@@ -43,11 +46,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="start-cid">From</label>
-                    <input class="form-control" type="datetime-local" id="start-cid" min="2018-09-20T14:45" max="2018-09-20T22:58" th:field="*{startDateTime}">
+                    <input class="form-control" type="datetime-local" id="start-cid" min="2019-11-26T00:00" max="2019-12-31T23:59" th:field="*{startDateTime}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="end-cid">To</label>
-                    <input class="form-control" type="datetime-local" id="end-cid" min="2018-09-20T14:46" max="2018-09-20T23:59" th:field="*{endDateTime}">
+                    <input class="form-control" type="datetime-local" id="end-cid" min="2019-11-26T00:00" max="2019-12-31T23:59" th:field="*{endDateTime}">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

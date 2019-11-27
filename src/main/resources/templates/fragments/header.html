@@ -37,7 +37,7 @@
                         User
                     </a>
                     <div class="dropdown-menu" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" th:href="@{/user/all}">View all</a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/user/all}">View all</a>
                         <a class="dropdown-item" th:href="@{/user/register}">Register user account</a>
                     </div>
                 </li>

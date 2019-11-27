@@ -20,20 +20,25 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // GET requests to /register
+    // The function returns a ModelAndView with the view and model necessary for a registration form
+    // The view is the user_register.html file, the model is the UserDto()
     @GetMapping("/register")
     public ModelAndView showRegistrationForm(Model model) {
         return new ModelAndView("user_register", "user", new UserDto());
     }
 
+    // POST to /register
+    // The method takes a UserDto (user Data Transfer Object) and BindingResult as parameters
+    // and checks whether there are any errors before either returning the registration form again or registering
+    // the user, returning the view and model necessary to show all users.
     @PostMapping("/register")
-    public ModelAndView registerUser(@Valid UserDto userDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView("registration", "user", userDto);
-        } else if (userDto == null) {
-            return new ModelAndView("registration", "user", new UserDto());
+    public String registerUser(@Valid UserDto userDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors() || userDto == null) {
+            return "redirect:/user/register?error";
         }
         userService.registerNewUser(userDto);
-        return new ModelAndView("user_all", "users", userService.getAll());
+        return "redirect:/login?registrationSuccess";
     }
 
     @GetMapping("/all")

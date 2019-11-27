@@ -12,7 +12,8 @@ import java.util.List;
 
 @Service
 public class BookingServiceImpl implements BookingService {
-    // TODO Add common abstract
+
+    // TODO Legg til felles abstract
     @Autowired
     private BookingRepository bookingRepository;
 

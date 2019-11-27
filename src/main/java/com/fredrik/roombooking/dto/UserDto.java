@@ -1,9 +1,12 @@
 package com.fredrik.roombooking.dto;
 
+import com.fredrik.roombooking.validation.PasswordMatches;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@PasswordMatches
 public class UserDto {
 
     @NotNull

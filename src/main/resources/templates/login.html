@@ -16,10 +16,13 @@
 <div class="col-md-6">
     <h2>Log in</h2>
     <div th:if="${param.error}">
-        Invalid username and password.
+        Invalid email or password.
     </div>
     <div th:if="${param.logout}">
         You have been logged out.
+    </div>
+    <div th:if="${param.registrationSuccess}">
+        Your account has been registered. Please log in with your email and password to access the application.
     </div>
     <form th:action="@{/login}" method="post">
         <div class="form-group">

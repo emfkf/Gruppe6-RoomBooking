@@ -21,7 +21,7 @@
         <ul>
             <li sec:authorize="hasAuthority('WRITE_PRIVILEGE')"><a th:href="@{/room/all}">View all rooms</a></li>
             <li sec:authorize="hasAuthority('WRITE_PRIVILEGE')"><a th:href="@{/room/add}">Add a room</a></li>
-            <li><a th:href="@{/user/all}">View all users</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/user/all}">View all users</a></li>
             <li><a th:href="@{/user/register}">Register user account</a></li>
             <li><a th:href="@{/room/book}">Book a room</a></li>
             <li><a th:href="@{/room/booked}">View all booked rooms</a></li>

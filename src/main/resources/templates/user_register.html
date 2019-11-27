@@ -14,6 +14,9 @@
 <div class="row">
 <div class="col-md-3"></div>
 <div class="col-md-6">
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">>
+        There was an error with your registration. Please verify your information and try again.
+    </div>
     <h2>Sign up</h2>
     <form action="/" th:action="@{/user/register}" th:object="${user}" method="post">
         <div class="form-group">
@@ -40,6 +43,9 @@
         <div class="form-group">
             <label for="password-cid">Password</label>
             <input type="password" class="form-control" id="password-cid" placeholder="Password" th:field="*{password}" />
+            <small id="passwordHelpInline" class="text-muted">
+                Must be at least 8 characters.
+            </small>
             <div class="alert alert-danger" th:each="error: ${#fields.errors('password')}" th:text="${error}">
                 Validation error
             </div>

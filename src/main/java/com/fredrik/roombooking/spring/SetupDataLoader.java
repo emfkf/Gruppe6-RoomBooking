@@ -25,20 +25,32 @@ public class SetupDataLoader {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /*
+     After component is injected, creates read and write privileges as well as user and administrator
+     privileges if they do not already exist. If no users exist, we create a user with administrator access.
+     */
     @PostConstruct
     public void init() {
         final Privilege readPrivilege = createPrivilegeIfNotFound("READ_PRIVILEGE");
         final Privilege writePrivilege = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
-        final Privilege passwordPrivilege = createPrivilegeIfNotFound("CHANGE_PASSWORD_PRIVILEGE");
 
         final List<Privilege> adminPrivileges = new ArrayList<>(Arrays.asList(readPrivilege, writePrivilege));
-        final List<Privilege> userPrivileges = new ArrayList<>(Arrays.asList(readPrivilege, passwordPrivilege));
+        final List<Privilege> userPrivileges = new ArrayList<>(Collections.singletonList(readPrivilege));
         final Role adminRole = createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
         createRoleIfNotFound("ROLE_USER", userPrivileges);
 
-        createUserIfNotFound("admin", "admin", "admin", "password", new ArrayList<>(Collections.singletonList(adminRole)));
+        createUserIfNotFound(
+                "admin",
+                "admin",
+                "admin",
+                "password",
+                new ArrayList<>(Collections.singletonList(adminRole))
+        );
     }
 
+    /*
+    If the privilege does not exist in the application, save it in the database. Returns the privilege.
+    */
     private Privilege createPrivilegeIfNotFound(final String name) {
         Privilege privilege = privilegeRepository.findByName(name);
         if (privilege == null) {
@@ -48,6 +60,10 @@ public class SetupDataLoader {
         return privilege;
     }
 
+    /*
+    Saves roles if not found with the name and privileges given as parameter
+    Returns the role
+     */
     private Role createRoleIfNotFound(final String name, final Collection<Privilege> privileges) {
         Role role = roleRepository.findByName(name);
         if (role == null) {
@@ -58,6 +74,9 @@ public class SetupDataLoader {
         return role;
     }
 
+    /*
+    Creates a user if not found
+     */
     private void createUserIfNotFound(final String email, final String firstName, final String lastName, final String password, final Collection<Role> roles) {
         User user = userRepository.findByEmail(email);
         if (user == null) {

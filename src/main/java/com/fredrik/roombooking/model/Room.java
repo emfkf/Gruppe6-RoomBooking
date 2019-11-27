@@ -25,8 +25,8 @@ public class Room {
     @Min(1)
     @Max(999)
     private int capacity;
-    @Column(name = "times_booked")
-    private int timesBooked;
+    //@Column(name = "times_booked")
+    //private int timesBooked;
 
     public Room() {
 
@@ -79,6 +79,7 @@ public class Room {
         this.capacity = capacity;
     }
 
+    /*
     public int getTimesBooked() {
         return timesBooked;
     }
@@ -87,4 +88,6 @@ public class Room {
         this.timesBooked = timesBooked;
     }
 
+
+     */
 }

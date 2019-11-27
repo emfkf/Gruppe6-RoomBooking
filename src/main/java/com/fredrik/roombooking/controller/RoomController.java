@@ -20,7 +20,7 @@ import java.security.Principal;
 @Controller
 @RequestMapping(path = "/room")
 public class RoomController {
-    
+
     @Autowired
     private RoomService roomService;
     @Autowired
@@ -43,7 +43,7 @@ public class RoomController {
     @PostMapping("/add")
     public String checkRoomForm(@Valid Room room, BindingResult bindingResult) {
         if (bindingResult.hasErrors() && room == null) {
-            return "redirect:/room/add";
+            return "redirect:/room/all?error";
         }
         roomService.addRoom(room);
         return "redirect:/room/all";
@@ -69,6 +69,8 @@ public class RoomController {
     public String handleDeleteRoom(@RequestParam(name = "roomId") String roomId) {
         if (!bookingService.isBooked(roomService.getRoom(Long.parseLong(roomId)))) {
             roomService.deleteRoom(Long.parseLong(roomId));
+        } else {
+            return "redirect:/room/all?error";
         }
         return "redirect:/room/all";
     }
@@ -81,6 +83,8 @@ public class RoomController {
     public String handleUpdateRoom(@RequestParam(name = "roomId") String roomId, @Valid Room room, BindingResult bindingResult) {
         if (!bindingResult.hasErrors() && room != null) {
             roomService.updateRoom(Long.parseLong(roomId), room);
+        } else {
+            return "redirect:/room/all?error";
         }
         return "redirect:/room/all";
     }
@@ -99,6 +103,8 @@ public class RoomController {
 
                 roomService.addRoom(room);
             }
+        } else {
+            return "redirect:/room/all?error";
         }
         return "redirect:/room/all";
     }
@@ -114,7 +120,7 @@ public class RoomController {
     @PostMapping("/book")
     public String checkBookingForm(@Valid BookingDto booking, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/room/booked";
+            return "redirect:/room/book?error";
         }
         Room room = roomService.getRoom(booking.getRoomId());
         User user = userService.getUser(booking.getUserId());

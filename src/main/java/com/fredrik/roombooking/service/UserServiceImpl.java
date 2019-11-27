@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-    // FREDRIK
     @Override
     public List<User> getUserByEmail(String email) {
         if (email.equals("admin")) {

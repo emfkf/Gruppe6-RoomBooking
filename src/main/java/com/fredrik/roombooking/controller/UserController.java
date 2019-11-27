@@ -38,7 +38,7 @@ public class UserController {
             return "redirect:/user/register?error";
         }
         userService.registerNewUser(userDto);
-        return "redirect:/login?registrationSuccess";
+        return "redirect:/?regSuccess";
     }
 
     @GetMapping("/all")

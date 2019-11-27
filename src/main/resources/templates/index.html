@@ -14,8 +14,11 @@
 <div th:insert="fragments/header :: header" id="nav-cid"></div>
 <div>
     <div class="container mt-lg-5">
+        <div th:if="${param.regSuccess}" class="alert alert-success" role="alert">
+            Your account has been registered. Please log in with your email and password to access the application.
+        </div>
         <div sec:authorize="isAnonymous()">
-            <p>Please log in or register a new account to access the application.</p>
+            <p>Please log in to access the application.</p>
         </div>
         <h1 sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></h1>
         <ul>
